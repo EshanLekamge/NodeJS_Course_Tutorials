@@ -1,17 +1,20 @@
-const http = require('http')
+//Installing npm packages
 
-const server = http.createServer((req, res)=>{
-    if(req.url === '/')
-    {
-        res.end('Welcome to our home page')
-    }
-    else if(req.url === '/about')
-    {
-        res.end('Here is our short history')
-    }
-    else{
-        res.end(`<h1>Oops!</h1></br><p>We can't seem to find the page you are looking for!</p></br><a href ="/">Home</a>`)
-    }
-})
-   
-server.listen(5000)
+// local dependency - use it only in this particular project
+// npm i <packageName>
+
+// global dependency - use it in any project
+// npm install -g <packageName>
+// sudo npm install -g <packageName> (mac)
+
+// package.json - manifest file  (stores important info about project/package)
+// npm init (step by step, press enter to skip)
+// npm init -y (everything default)
+
+const l = require('lodash')
+
+const items = [1, [2, [3, [4]]]]
+
+const newItems = l.flattenDeep(items)
+
+console.log(newItems)
