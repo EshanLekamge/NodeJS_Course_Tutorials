@@ -49,4 +49,3 @@ app.get('/api/v1/query',(req,res)=>{
 app.listen(5000,()=>{
     console.log('Server is listening to port 5000')
 })
-
