@@ -1,29 +1,25 @@
 const express = require('express')
 const app = express()
-const morgan = require('morgan')
-const logger = require('./logger')
-const authorize = require('./authorize')
+let {people} = require('./data')
 
-// req => middleware => res
+// static assests
+app.use(express.static('./methods-public'))
 
-// app.use([logger, authorize])
+// parse form data
+app.use(express.urlencoded({extended:false}))
 
-app.use(morgan('tiny'))
-
-app.get('/', (req,res)=>{
-    res.send('Home page')
+app.get('/api/people',(req,res)=>{
+    res.status(200).json({success:true, data:people})
 })
 
-app.get('/about', (req,res)=>{
-    res.send('About page')
-})
-
-app.get('/api/products', (req,res)=>{
-    res.send('Products page')
-})
-
-app.get('/api/items', (req,res)=>{
-    res.send('Items page')
+app.post('/login',(req,res)=>{
+    const {name} = req.body
+    if(name){
+        return res.status(200).send(`Welcome ${name}`)
+    }
+    else{
+        return res.status(401).send(`Please Provide Credentials`)
+    }
 })
 
 app.listen(5000,()=>{
